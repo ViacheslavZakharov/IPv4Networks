@@ -1,0 +1,72 @@
+div.flexMainContainer .flexHeaderContainer {
+    display: flex;
+}
+
+div.flexMain {
+    flex: 1;
+    /* background: pink; */
+}
+
+div#mainContainer {
+    flex: 3;
+    margin: 10px 0;
+    /* background: greenyellow; */
+}
+
+div.flexHeaderContainer {
+    background: lightskyblue;
+    border-radius: 10px;
+}
+
+div.clientContainerHeader {
+    flex: 2;
+    margin: 5px 0;
+    /* background: blue; */
+    display: inline-block;
+    font-family: 'Verdana, Geneva, Tahoma, sans-serif';
+    font-size: 25px;
+    font-weight: bolder;
+}
+
+div.flexHeader {
+    flex: 1;
+    /* background:white; */
+    display: inline-block;
+}
+
+div.clientContainerHeader {
+    text-align: center;
+}
+
+div.classClientContainer :not(.flexClientButtonGroup) {
+    font-family: 'Verdana, Geneva, Tahoma, sans-serif';
+    font-size: 20px;
+}
+
+div.classClientContainer {
+    /* border: 2px dashed grey; */
+    border-radius: 10px;
+}
+
+
+/* div.mainContainer {
+    font-family: 'Verdana, Geneva, Tahoma, sans-serif';
+    font-size: 20px;
+} */
+
+
+/* div.flexClientContainer {
+    display: flex;
+}
+
+div.flexClientIdContainer .flexClientNetworkContainer {
+    flex: 2;
+    background: blue;
+    display: inline-block;
+}
+
+div.flexClientButtonGroup {
+    flex: 1;
+    background: lightslategray;
+    display: inline-block;
+} */

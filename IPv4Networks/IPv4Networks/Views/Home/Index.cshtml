@@ -1,0 +1,85 @@
+﻿@model List<Client>
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*<script src="http://code.jquery.com/jquery-1.7.js"></script>*@
+
+<script type="text/javascript" src="~/lib/jquery/dist/jquery.js"></script>
+<script type="text/javascript" src="~/js/clientService.js"></script>
+<script src="~/js/main.js"></script>
+<h1 style="text-align: center">IPv4-подсети клиентов Холдинга</h1>
+<div class="flexMainContainer">
+    <div class="flexMain"></div>
+    <div id="mainContainer">
+        <div id="clientsContainer">
+            @{
+                var numberElement = 1;
+                var backgroundClientContainer = "";
+            }
+            @foreach (var client in Model)
+            {
+
+                @if (numberElement == 1)
+                {
+                    <div class="flexHeaderContainer">
+                        <div class="clientContainerHeader"> Идентификатор </div>
+                        <div class="clientContainerHeader"> IPv4 - подсеть </div>
+                        <div class="flexHeader"></div>
+                    </div>
+                }
+                @if (numberElement %2 == 0)
+                {
+                    backgroundClientContainer = "background:lightgrey;";
+                }
+                else
+                {
+                    backgroundClientContainer = "background:white;";
+                }
+                <div class="classClientContainer" style="@("display:flex;align-items:flex-end;margin:4px 0;" + backgroundClientContainer)" id=@(numberElement + "_Container")>
+                    <div id=@(numberElement + "_clientIdDiv") style="flex: 2;text-align: center;">@client.Id</div>
+                    <div id=@(numberElement + "_clientNetworkDiv") style="flex: 2;text-align: center;">@client.SubNetwork</div>
+                    <div class="flexClientButtonGroup" style="flex: 1;">
+                        <div style="margin:2px 0;">
+                            <input type="button" value="X" id=@(numberElement + "_removeClientButton") class="btn btn-danger"/>
+                        </div>
+                        <div style="margin:2px 0;">
+                            <input type="button" value="Редактировать" id=@(numberElement + "_editClientButton") class="btn btn-primary"/>
+                            @*<button type="button" id=@(numberElement + "_editClientButton") class="btn btn-primary" >Редактировать</button>*@
+                        </div>
+                    </div>
+                </div>
+                <script>
+
+                    //навешиваем событие на кнопку удаления
+                    @*var removeButtonId = String(@(numberElement)) + "_removeClientButton";
+                    var containerId =*@ 
+                    bindClickHandlerToButton(@numberElement + "_Container", removeClient, @numberElement + "_removeClientButton", @numberElement);
+                    //навешиваем событие на кнопку редактирования
+                    bindClickHandlerToButton(@numberElement + "_Container", displayAddFormForEditing, @numberElement + "_editClientButton", @numberElement);
+                </script>
+                numberElement++;
+            }
+        </div>
+            <input type="button" id="addNewClientInput" class="btn btn-primary" value="Добавить нового клиента" onclick="displayAddFormForAddition()" />
+            <div id="addClientForm" style="display: none">
+                <div>
+                    @*<div style="display:inline-block">Введите идентификатор:</div>*@
+                    <label for="inputNewClientId">Введите идентификатор клиента</label>
+                    <input type="text" id="inputNewClientId" class="form-control" aria-describedby="idHelp" placeholder="Введите идентификатор" />
+                    <small id="idHelp" class="form-text text-muted">Должен быть уникальным и не более 255 символов</small>
+                </div>
+                <div>
+                    @*<div style="display:inline-block">Введите подсеть</div>*@
+                    <label for="inputNewClientNetwork">Введите подсеть клиента</label>
+                    <input type="text" id="inputNewClientNetwork" class="form-control" placeholder="напр. 46.48.11.244/30" />
+                </div>
+                <div>
+                    <input id="completeInput" type="button" value="Готово" class="btn btn-success"/>
+                    <input id="canselInput" type="button" value="Отмена" onclick="canselAddingClient()" class="btn btn-danger"/>
+                </div>
+            </div>
+    </div>
+    <div class="flexMain"></div>
+</div>

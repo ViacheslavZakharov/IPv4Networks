@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.572
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IPv4Networks", "IPv4Networks\IPv4Networks.csproj", "{136AD061-E271-4CAD-8F7A-CDF5233FDA05}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IPv4Networks.Tests", "IPv4Networks.Tests\IPv4Networks.Tests.csproj", "{7F3FA7DE-0964-4776-8918-1A77D95FCC5E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{136AD061-E271-4CAD-8F7A-CDF5233FDA05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{136AD061-E271-4CAD-8F7A-CDF5233FDA05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{136AD061-E271-4CAD-8F7A-CDF5233FDA05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{136AD061-E271-4CAD-8F7A-CDF5233FDA05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F3FA7DE-0964-4776-8918-1A77D95FCC5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F3FA7DE-0964-4776-8918-1A77D95FCC5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F3FA7DE-0964-4776-8918-1A77D95FCC5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F3FA7DE-0964-4776-8918-1A77D95FCC5E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {27446A90-1FDB-4297-84D9-0B1AF9619DCF}
+	EndGlobalSection
+EndGlobal
