@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using IPv4Networks.Models;
-using Newtonsoft.Json.Linq;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using IPv4Networks.Services;
@@ -14,7 +10,7 @@ namespace IPv4Networks.Controllers
 {
     public class HomeController : Controller
     {
-        public readonly ClientRepository repo;
+        public readonly ClientRepository repo;//для работы с базой данных
 
         public HomeController(IConfiguration configuration)
         {
@@ -30,29 +26,19 @@ namespace IPv4Networks.Controllers
         [HttpPost]
         public Client AddClient(Client client)
         {
-            //if(client != null && ClientChecker.IsValidClientId(repo, client.Id) &&
-            //    ClientChecker.IsValidIPAddress(client.SubNetwork))
-            //{
-            //    repo.AddClient(client);
-            //}
-            //else
-            //{
-            //    return null;
-            //}
-            //return client;
-            return client != null &&
+            return client != null && //если данные пришли
                    client.Id != null &&
                    client.SubNetwork != null &&
-                   ClientChecker.IsValidClientId(repo, client.Id) &&
-                   ClientChecker.IsValidIPAddress(client.SubNetwork) ?
-                        repo.AddClient(client) :
-                        null;
+                   ClientChecker.IsValidClientId(repo, client.Id) && //и id является валидным
+                   ClientChecker.IsValidIPAddress(client.SubNetwork) ? //и адрес подсети валидный
+                        repo.AddClient(client) : //то возвращаем добавленного клиента
+                        null; // иначе передаем на клиент null
         }
 
         [HttpPut]
         public Client EditClient(EditingClient editingClient)
         {
-            Client newClient = editingClient.client;
+            Client newClient = editingClient.Client;
             Func<Client> updateClient = () =>
                     ClientChecker.IsValidIPAddress(newClient.SubNetwork) ?
                     repo.Update(newClient) : 
@@ -82,7 +68,7 @@ namespace IPv4Networks.Controllers
         [HttpDelete]
         public Client RemoveClient(Client client)
         {
-            return repo.Delete(client.Id) != null ?
+            return repo.Delete(client.Id) != null ? 
                         client :
                         null;
 

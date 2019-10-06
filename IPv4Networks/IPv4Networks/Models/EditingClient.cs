@@ -7,7 +7,7 @@ namespace IPv4Networks.Models
 {
     public class EditingClient
     {
-        public Client client { get; set; }
+        public Client Client { get; set; }
         public string OldClientId { get; set; }
     }
 }

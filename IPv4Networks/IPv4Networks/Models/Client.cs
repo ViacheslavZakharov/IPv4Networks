@@ -9,6 +9,5 @@ namespace IPv4Networks.Models
     {
         public string Id { get; set; }
         public string SubNetwork { get; set; }
-     //   public static bool isFirst = true;
     }
 }
