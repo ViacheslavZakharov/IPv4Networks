@@ -38,7 +38,7 @@ div.clientContainerHeader {
     text-align: center;
 }
 
-div.classClientContainer :not(.flexClientButtonGroup) {
+div.classClientId, .classClientSubNetwork {
     font-family: 'Verdana, Geneva, Tahoma, sans-serif';
     font-size: 20px;
 }
@@ -46,7 +46,11 @@ div.classClientContainer :not(.flexClientButtonGroup) {
 div.classClientContainer {
     /* border: 2px dashed grey; */
     border-radius: 10px;
+    display:flex;
+    align-items: flex-end;
+    margin:4px 0;
 }
+
 
 
 /* div.mainContainer {

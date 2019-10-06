@@ -55,7 +55,7 @@ function appendContainerClient(clientId, clientNetwork, isFirstClient) {
     }
     var containerId = getIdContainer();
     var backgroundClientContainer = "";
-    if (containerId % 2 == 0) {
+    if (containerId % 2 === 0) {
         backgroundClientContainer = "background:lightgrey;";
     } else {
         backgroundClientContainer = "background:white;";
@@ -74,22 +74,22 @@ function appendContainerClient(clientId, clientNetwork, isFirstClient) {
         //         </div>\
         // </div>"
         "<div id = \"" + containerId + "_Container\" class=\"classClientContainer\" style = \"display:flex;align-items:flex-end;margin:4px 0;" + backgroundClientContainer + "\"> \
-            <div id =\"" + containerId + "_clientIdDiv\" style=\"flex: 2;text-align: center;\">" + clientId + "</div> \
-            <div id =\"" + containerId + "_clientNetworkDiv\" style=\"flex: 2;text-align: center;\">" + clientNetwork + "</div>\
+            <div id =\"" + containerId + "_clientIdDiv\" class=\"classClientId\" style=\"flex: 2;text-align: center;\">" + clientId + "</div> \
+            <div id =\"" + containerId + "_clientNetworkDiv\" class=\"classClientSubNetwork\" style=\"flex: 2;text-align: center;\">" + clientNetwork + "</div>\
             <div class=\"flexClientButtonGroup\" style=\"flex: 1;\">\
                 <div style=\"margin:2px 0;\"> \
-                    <input id =\"" + containerId + "_removeClientButton\" type = \"button\" value = \"X\" class=\"btn btn-danger\" />\
+                    <input id =\"" + containerId + "_removeClientButton\" type = \"button\" value = \"X\" class=\"btn btn-danger btn-sm\" />\
                 </div>\
                 <div style=\"margin:2px 0;\"> \
-                    <input type = \"button\" value = \"Редактировать\"  id =\"" + containerId + "_editClientButton\" class=\"btn btn-primary\" />\
+                    <input type = \"button\" value = \"Редактировать\"  id =\"" + containerId + "_editClientButton\" class=\"btn btn-primary btn-sm\" />\
                 </div>\
         </div>\
 </div>"
     );
     //навешиваем событие на кнопку удаления
-    bindClickHandlerToButton(containerId + "_Container", removeClient, containerId + '_removeClientButton', containerId);
+    bindClickHandlerToButton(onRemoveClientButtonClick, containerId + '_removeClientButton', containerId);
     //навешиваем событие на кнопку редактирования
-    bindClickHandlerToButton(containerId + "_Container", displayAddFormForEditing, containerId + '_editClientButton', containerId);
+    bindClickHandlerToButton(displayAddFormForEditing, containerId + '_editClientButton', containerId);
 }
 
 function getIdContainer() {
@@ -145,7 +145,7 @@ function addClient() {
     // var url = "https://localhost:5001/Home/AddClient";
     // var url = window.location.toString() + "/Home/AddClient";
 
-    AjaxRequest.post("Home/AddClient", valueInputId, valueClientNetwork, addContainerWithClient);
+    ClientService.post("Home/AddClient", valueInputId, valueClientNetwork, addContainerWithClient);
     //     //var model = {
     //     //    id: valueInputId,
     //     //    subNetwork: valueClientNetwork
@@ -236,7 +236,7 @@ function canselAddingClient() {
     $("#completeInput").unbind('click', editClient);
 }
 
-function bindClickHandlerToButton(parentContainerId, func, buttonContainerId, clientContainerId = 0) {
+function bindClickHandlerToButton(func, buttonContainerId, clientContainerId = 0) {
 
     //var $clientButton = $("#" + parentContainerId).find('#' + buttonContainerId);
     var $clientButton = $('#' + buttonContainerId);
@@ -246,7 +246,7 @@ function bindClickHandlerToButton(parentContainerId, func, buttonContainerId, cl
 
 function displayAddFormForAddition() {
     toggleDisplayAddFormAndInput();
-    bindClickHandlerToButton("mainContainer", addClient, "completeInput");
+    bindClickHandlerToButton(addClient, "completeInput");
 }
 
 //!!!!!!!!!!!!!
@@ -255,14 +255,24 @@ function displayAddFormForEditing(event) {
     //!!!!!!!!
     var idEditingElement = event.target.getAttribute('id');
     toggleDisplayAddFormAndInput("inline-block", "none", true, idEditingElement);
-    bindClickHandlerToButton("mainContainer", editClient, "completeInput", idEditingElement);
+    bindClickHandlerToButton(editClient, "completeInput", idEditingElement);
 }
 
-function removeClient(e) {
+function onRemoveClientButtonClick(e) {
+
     var clientContainerId = e.target.getAttribute('id').split('_removeClientButton')[0];
-    var clientNetwork = $("#" + clientContainerId + "_clientNetworkDiv").html();
-    var clientId = $("#" + clientContainerId + "_clientIdDiv").html();
-    AjaxRequest.delete("Home/RemoveClient", clientId, clientNetwork, removeClientContainer, clientContainerId);
+
+    // $('#myModalBox').on('hide.bs.modal', (event) => {
+    //     var button = $(event.relatedTarget);
+    // });
+    $("#deleteModalBox").modal('show');
+    bindClickHandlerToButton(removeClient, "deleteButtonModalBox", clientContainerId);
+    $('#deleteModalBox').on('hide.bs.modal', () => {
+        $("#deleteButtonModalBox").unbind('click', removeClient);
+    });
+    // var clientNetwork = $("#" + clientContainerId + "_clientNetworkDiv").html();
+    // var clientId = $("#" + clientContainerId + "_clientIdDiv").html();
+    // AjaxRequest.delete("Home/RemoveClient", clientId, clientNetwork, removeClientContainer, clientContainerId);
     //ajax запрос
     //TODO:
     //!!!!!подправить
@@ -294,9 +304,20 @@ function removeClient(e) {
     // $clientContainer.remove();
 }
 
+function removeClient(e) {
+    $("#deleteModalBox").modal('hide');
+    var clientContainerId = e.data.clientContainerId;
+    var clientNetwork = $("#" + clientContainerId + "_clientNetworkDiv").html();
+    var clientId = $("#" + clientContainerId + "_clientIdDiv").html();
+    ClientService.delete("Home/RemoveClient", clientId, clientNetwork, removeClientContainer, clientContainerId);
+
+}
+
 function removeClientContainer(receivedData, clientContainerId) {
-    var $clientContainer = $('#' + clientContainerId + '_Container');
-    $clientContainer.remove();
+    if (receivedData !== undefined) {
+        var $clientContainer = $('#' + clientContainerId + '_Container');
+        $clientContainer.remove();
+    }
 }
 
 function editClient(e) {
@@ -307,8 +328,8 @@ function editClient(e) {
     var clientContainerId = e.data.clientContainerId.split('_editClientButton')[0];
 
     var oldValueId = $("#" + clientContainerId + "_clientIdDiv").html();
-    var oldValueNetwork = $("#" + clientContainerId + "_clientNetworkDiv").html();
-    AjaxRequest.put("Home/EditClient", oldValueId, valueInputId, valueClientNetwork, editValueIdAndNetworkClient, clientContainerId);
+    // var oldValueNetwork = $("#" + clientContainerId + "_clientNetworkDiv").html();
+    ClientService.put("Home/EditClient", oldValueId, valueInputId, valueClientNetwork, editValueIdAndNetworkClient, clientContainerId);
     //редактирование на клиенте
 
     // var editValueDiv = function(idElement, newValue) {

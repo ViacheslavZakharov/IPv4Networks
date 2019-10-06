@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 //using System.Configuration;
 using Dapper;
 using IPv4Networks.Services;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 
 namespace IPv4Networks.Models
 {
@@ -16,7 +18,16 @@ namespace IPv4Networks.Models
         private readonly string connectionString;
         public ClientRepository(IConfiguration configuration/*IConfiguration configuration*/)
         {
-            connectionString = configuration.GetSection("ConnectionStrings")["DefaultConnection"];
+            // IHostingEnvironment environment;
+            // configuration
+            // string connection = environment.ContentRootPath;
+            string connection = configuration.GetConnectionString("DefaultConnection");
+            if (connection.Contains("%PROJECTROOTFOLDER%"))
+            {
+                connection = connection.Replace("%PROJECTROOTFOLDER%", Directory.GetCurrentDirectory());
+            }
+            connectionString = connection;
+            //connectionString = configuration.GetSection("ConnectionStrings")["DefaultConnection"];
         }
         // private string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
         //private static IConfiguration configuration;

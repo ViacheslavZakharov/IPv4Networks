@@ -1,4 +1,4 @@
-class AjaxRequest {
+class ClientService {
     static post(controllerMethod, clientId, clientNetwork, successFunc) {
         var url = window.location.toString() + controllerMethod.toString();
         $.ajax({

@@ -10,6 +10,30 @@
 <script type="text/javascript" src="~/js/clientService.js"></script>
 <script src="~/js/main.js"></script>
 <h1 style="text-align: center">IPv4-подсети клиентов Холдинга</h1>
+<hr/>
+
+<div id="deleteModalBox" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Заголовок модального окна -->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Удаление записи о клиенте</h4>
+            </div>
+            <!-- Основное содержимое модального окна -->
+            <div class="modal-body">
+                Вы уверены, что хотите удалить запись? После удаления восстановить запись будет невозможно.
+            </div>
+            <!-- Футер модального окна -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                <button type="button" class="btn btn-danger" id="deleteButtonModalBox">Удалить</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <div class="flexMainContainer">
     <div class="flexMain"></div>
     <div id="mainContainer">
@@ -37,15 +61,15 @@
                 {
                     backgroundClientContainer = "background:white;";
                 }
-                <div class="classClientContainer" style="@("display:flex;align-items:flex-end;margin:4px 0;" + backgroundClientContainer)" id=@(numberElement + "_Container")>
-                    <div id=@(numberElement + "_clientIdDiv") style="flex: 2;text-align: center;">@client.Id</div>
-                    <div id=@(numberElement + "_clientNetworkDiv") style="flex: 2;text-align: center;">@client.SubNetwork</div>
+                <div class="classClientContainer" style="@("" + backgroundClientContainer)" id=@(numberElement + "_Container")>
+                    <div id=@(numberElement + "_clientIdDiv") class="classClientId" style="flex: 2;text-align: center;">@client.Id</div>
+                    <div id=@(numberElement + "_clientNetworkDiv") class="classClientSubNetwork" style="flex: 2;text-align: center;">@client.SubNetwork</div>
                     <div class="flexClientButtonGroup" style="flex: 1;">
                         <div style="margin:2px 0;">
-                            <input type="button" value="X" id=@(numberElement + "_removeClientButton") class="btn btn-danger"/>
+                            <input type="button" value="X" id=@(numberElement + "_removeClientButton") class="btn btn-danger btn-sm"/>
                         </div>
                         <div style="margin:2px 0;">
-                            <input type="button" value="Редактировать" id=@(numberElement + "_editClientButton") class="btn btn-primary"/>
+                            <input type="button" value="Редактировать" id=@(numberElement + "_editClientButton") class="btn btn-primary btn-sm"/>
                             @*<button type="button" id=@(numberElement + "_editClientButton") class="btn btn-primary" >Редактировать</button>*@
                         </div>
                     </div>
@@ -55,9 +79,9 @@
                     //навешиваем событие на кнопку удаления
                     @*var removeButtonId = String(@(numberElement)) + "_removeClientButton";
                     var containerId =*@ 
-                    bindClickHandlerToButton(@numberElement + "_Container", removeClient, @numberElement + "_removeClientButton", @numberElement);
+                    bindClickHandlerToButton(onRemoveClientButtonClick, @numberElement + "_removeClientButton", @numberElement);
                     //навешиваем событие на кнопку редактирования
-                    bindClickHandlerToButton(@numberElement + "_Container", displayAddFormForEditing, @numberElement + "_editClientButton", @numberElement);
+                    bindClickHandlerToButton(displayAddFormForEditing, @numberElement + "_editClientButton", @numberElement);
                 </script>
                 numberElement++;
             }
@@ -73,7 +97,7 @@
                 <div>
                     @*<div style="display:inline-block">Введите подсеть</div>*@
                     <label for="inputNewClientNetwork">Введите подсеть клиента</label>
-                    <input type="text" id="inputNewClientNetwork" class="form-control" placeholder="напр. 46.48.11.244/30" />
+                    <input type="text" id="inputNewClientNetwork" class="form-control" placeholder="например, 46.48.11.244/30" />
                 </div>
                 <div>
                     <input id="completeInput" type="button" value="Готово" class="btn btn-success"/>
