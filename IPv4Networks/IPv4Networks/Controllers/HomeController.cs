@@ -14,7 +14,7 @@ namespace IPv4Networks.Controllers
 
         public HomeController(IConfiguration configuration)
         {
-            repo = new ClientRepository(configuration);
+            repo = new ClientRepository(configuration, System.IO.Directory.GetCurrentDirectory());
         }
 
         public IActionResult Index()

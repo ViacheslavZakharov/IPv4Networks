@@ -9,12 +9,12 @@ namespace IPv4Networks.Models
     public class ClientRepository
     {
         private readonly string connectionString;
-        public ClientRepository(IConfiguration configuration)
+        public ClientRepository(IConfiguration configuration, string currentProjectDirectory)
         {
             var defaultConnectionString = configuration.GetConnectionString("DefaultConnection");
             connectionString = defaultConnectionString.Contains("%PROJECTROOTFOLDER%") ?
                                defaultConnectionString.Replace(
-                                     "%PROJECTROOTFOLDER%", Directory.GetCurrentDirectory()) :
+                                     "%PROJECTROOTFOLDER%", currentProjectDirectory/*Directory.GetCurrentDirectory()*/) :
                                defaultConnectionString;
         }
 

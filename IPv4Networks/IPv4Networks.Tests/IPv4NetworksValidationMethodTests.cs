@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace IPv4Networks.Tests
 {
-    public class TestIPv4Networks
+    public class IPv4NetworksValidationMethodTests
     {
         [SetUp]
         public void Setup()

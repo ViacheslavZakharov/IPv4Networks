@@ -10,13 +10,14 @@ using System.Linq;
 
 namespace IPv4Networks.Tests
 {
-    public class TestClientId
+    public class ClientIdValidationMethodTests
     {
         private readonly ClientRepository repo;
-        public TestClientId()
+        public ClientIdValidationMethodTests()
         {
             IConfiguration configuration = GetterConfiguration.GetConfiguration();
-            repo = new ClientRepository(configuration);
+            var currentDirOfTestedProject = GetterConfiguration.GetCurrentDirOfTestedProject();
+            repo = new ClientRepository(configuration, currentDirOfTestedProject);
         }
 
         [SetUp]
@@ -64,7 +65,7 @@ namespace IPv4Networks.Tests
         public void AddingNotUniqueId()
         {
             //добавим клиента в базу данных, затем получим его по id
-            //и по пробуем добавить другого пользователя с таким же id
+            //и попробуем добавить другого пользователя с таким же id
             Client addedClient = new Client { Id = "newId2", SubNetwork = "222.222.222.222/20" };
             repo.AddClient(addedClient);
             Client client = repo.GetClientById(addedClient.Id);
