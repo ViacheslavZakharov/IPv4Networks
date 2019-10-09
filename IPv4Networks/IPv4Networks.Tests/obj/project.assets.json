@@ -9003,11 +9003,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\v_zah\\OneDrive\\Desktop\\IPv4Networks\\IPv4Networks\\IPv4Networks.Tests\\IPv4Networks.Tests.csproj",
+      "projectUniqueName": "C:\\Users\\v_zah\\OneDrive\\Desktop\\учеба\\дополнительно\\ProjectITAmHolding\\IPv4Networks\\IPv4Networks\\IPv4Networks.Tests\\IPv4Networks.Tests.csproj",
       "projectName": "IPv4Networks.Tests",
-      "projectPath": "C:\\Users\\v_zah\\OneDrive\\Desktop\\IPv4Networks\\IPv4Networks\\IPv4Networks.Tests\\IPv4Networks.Tests.csproj",
+      "projectPath": "C:\\Users\\v_zah\\OneDrive\\Desktop\\учеба\\дополнительно\\ProjectITAmHolding\\IPv4Networks\\IPv4Networks\\IPv4Networks.Tests\\IPv4Networks.Tests.csproj",
       "packagesPath": "C:\\Users\\v_zah\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\v_zah\\OneDrive\\Desktop\\IPv4Networks\\IPv4Networks\\IPv4Networks.Tests\\obj\\",
+      "outputPath": "C:\\Users\\v_zah\\OneDrive\\Desktop\\учеба\\дополнительно\\ProjectITAmHolding\\IPv4Networks\\IPv4Networks\\IPv4Networks.Tests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -9026,8 +9026,8 @@
       "frameworks": {
         "netcoreapp2.1": {
           "projectReferences": {
-            "C:\\Users\\v_zah\\OneDrive\\Desktop\\IPv4Networks\\IPv4Networks\\IPv4Networks\\IPv4Networks.csproj": {
-              "projectPath": "C:\\Users\\v_zah\\OneDrive\\Desktop\\IPv4Networks\\IPv4Networks\\IPv4Networks\\IPv4Networks.csproj"
+            "C:\\Users\\v_zah\\OneDrive\\Desktop\\учеба\\дополнительно\\ProjectITAmHolding\\IPv4Networks\\IPv4Networks\\IPv4Networks\\IPv4Networks.csproj": {
+              "projectPath": "C:\\Users\\v_zah\\OneDrive\\Desktop\\учеба\\дополнительно\\ProjectITAmHolding\\IPv4Networks\\IPv4Networks\\IPv4Networks\\IPv4Networks.csproj"
             }
           }
         }

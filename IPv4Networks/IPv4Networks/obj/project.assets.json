@@ -12601,11 +12601,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\v_zah\\OneDrive\\Desktop\\IPv4Networks\\IPv4Networks\\IPv4Networks\\IPv4Networks.csproj",
+      "projectUniqueName": "C:\\Users\\v_zah\\OneDrive\\Desktop\\учеба\\дополнительно\\ProjectITAmHolding\\IPv4Networks\\IPv4Networks\\IPv4Networks\\IPv4Networks.csproj",
       "projectName": "IPv4Networks",
-      "projectPath": "C:\\Users\\v_zah\\OneDrive\\Desktop\\IPv4Networks\\IPv4Networks\\IPv4Networks\\IPv4Networks.csproj",
+      "projectPath": "C:\\Users\\v_zah\\OneDrive\\Desktop\\учеба\\дополнительно\\ProjectITAmHolding\\IPv4Networks\\IPv4Networks\\IPv4Networks\\IPv4Networks.csproj",
       "packagesPath": "C:\\Users\\v_zah\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\v_zah\\OneDrive\\Desktop\\IPv4Networks\\IPv4Networks\\IPv4Networks\\obj\\",
+      "outputPath": "C:\\Users\\v_zah\\OneDrive\\Desktop\\учеба\\дополнительно\\ProjectITAmHolding\\IPv4Networks\\IPv4Networks\\IPv4Networks\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

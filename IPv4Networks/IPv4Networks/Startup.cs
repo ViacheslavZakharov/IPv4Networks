@@ -16,21 +16,12 @@ namespace IPv4Networks
 {
     public class Startup
     {
-        private readonly string _contentRootPath = "";
-        // public Startup(IConfiguration configuration)
-        public Startup(IConfiguration configuration, IHostingEnvironment environment)
+        public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            _contentRootPath = environment.ContentRootPath;
-            //var dir = /*Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location*/Directory.GetCurrentDirectory()/*)*/;
-            //DirectoryInfo dirInfo = new DirectoryInfo(dir);
-            //dir += "\\IPv4Networks\\App_Data";
-            //AppDomain.CurrentDomain.SetData("DataDirectory", Directory.GetCurrentDirectory()/*dir*/);
-            //var str = AppDomain.CurrentDomain.GetData("DataDirectory").ToString();
         }
 
         public IConfiguration Configuration { get; }
-        //public string ConnectionString {get;set;}
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
